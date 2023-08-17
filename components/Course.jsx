@@ -1,32 +1,26 @@
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
-const Course = ({ course }) => {
-  console.log();
+const Course = () => {
   return (
-    <div className="mx-32 my-8 bg-yellow-50  h-52 flex gap-10 border-2 border-yellow-300 relative  ease-in-out duration-200 hover:shadow-lg hover:scale-105 hover:shadow-gray-100 ">
-      <div className="absolute -top-4 -right-8 bg-orange-400 p-2 text-white">
-        {course.course_type}
-      </div>
+    <div className="w-1/4 text-white bg-slate-700">
       <Image
-        src={course.image_link}
-        width="200"
-        height="100"
-        alt="Picture of the student"
-        className="object-cover w-64 h-full"
+        src="/assets/course.png"
+        width="400"
+        height="400"
+        alt="picture of the student"
+        className="object-cover  "
       ></Image>
-      <div className="p-4 flex flex-col gap-2">
-        <div className="text-4xl font-bold text-gray-600 mb-6">
-          {course.course_name}
-        </div>
-        <div className="text-2xl">{course.description} </div>
 
-        <Link
-          href={`/topic/${course.id}`}
-          className="bg-orange-400 text-white p-2 text-3xl w-44 rounded-md  active:bg-orange-200"
-        >
-          Start Now.
-        </Link>
+      <div className="flex flex-col justify-center p-3">
+        <h1 className="text-2xl">Python Tutorials - 100 Days of Code</h1>
+        <span className="text-slate-300 m-2">
+          Python is one of the most demanded programming languages in the job
+          market. Surprisingly, it is equally easy to learn and master Python.
+          Let's commit our 100 days of code to python!
+        </span>
+        <button className="bg-gradient-to-r from-violet-600 to-indigo-600 w-1/2 rounded-2xl p-2 m-4 text-2xl">
+          start now
+        </button>
       </div>
     </div>
   );

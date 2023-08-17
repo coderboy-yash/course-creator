@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "./../components/Navbar";
 
 import Hero from "@/components/Hero";
-import Courses from "@/components/Courses";
+import Creators from "@/components/Creators";
 import Footer from "@/components/Footer";
 
 const Home = () => {
@@ -12,10 +12,15 @@ const Home = () => {
     setToken(JSON.parse(sessionStorage.getItem("token")));
   }, []);
   return (
-    <div>
+    <div style={{
+      background:
+        "linear-gradient(35deg, rgb(23, 30, 49) 0%, rgb(0, 18, 45) 45%);",
+
+
+    }}>
       <Navbar token={token} setToken={setToken}></Navbar>
       <Hero token={token}></Hero>
-      <Courses></Courses>
+      <Creators></Creators>
       <Footer></Footer>
     </div>
   );

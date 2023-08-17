@@ -8,9 +8,18 @@ const Navbar = ({ token, setToken }) => {
     setToken(false);
   };
   return (
-    <div className="flex justify-between px-8 py-4 shadow-md shadow-yellow-300  items-center bg-white">
+    <div
+      style={{
+        background:
+          "linear-gradient(35deg, rgb(23, 30, 49) 0%, rgb(0, 18, 45) 45%);",
+      }}
+      className="flex justify-between px-8 py-2 mb-12  items-center bg-white"
+    >
       <div className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">
-      <Link href="/">  <span className="text-7xl font">S</span>kill Point</Link>
+        <Link href="/">
+          {" "}
+          <span className="text-2xl font">Course Creator</span>
+        </Link>
       </div>
 
       {token ? (
@@ -25,14 +34,14 @@ const Navbar = ({ token, setToken }) => {
       ) : (
         <div>
           <Link
-            className="bg-orange-400 p-3 mx-4 text-2xl rounded-xl text-white font-bold"
+            className="text-orange-400 p-3 mx-4 text-2xl rounded-xl  font-bold"
             href={"/signup"}
           >
             Sign Up
           </Link>
 
           <Link
-            className="bg-orange-400 p-3 mx-4 text-2xl rounded-xl text-white font-bold"
+            className=" p-3 mx-4 text-2xl rounded-xl text-orange-400 font-bold"
             href={"/login"}
           >
             Log In

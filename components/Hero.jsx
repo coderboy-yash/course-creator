@@ -4,7 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 const Hero = ({ token }) => {
   return (
-    <div>
+    <div
+      className="text-white"
+      style={{
+        background:
+          "linear-gradient(35deg, rgb(23, 30, 49) 0%, rgb(0, 18, 45) 45%);",
+      }}
+    >
       <div className="flex p-4  justify-between h-screen">
         <div className="basis-1/2 flex    flex-col">
           {token && (
@@ -12,12 +18,12 @@ const Hero = ({ token }) => {
               Welcome {token.user.user_metadata.full_name}
             </div>
           )}
-          <div className="text-6xl mt-8 font-bold text-gray-700">
-            Learn Job ready skills from{" "}
-            <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">
+          <div className="text-5xl  mt-8 font-medium text-white">
+            Create your online course for
+            <span className="font-bold mx-4 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">
               free
-            </span>{" "}
-            online courses .
+            </span>
+            with your youtube videos.
           </div>
           <div className="mt-8">
             1000+ Free Courses, Live Sessions by Experts, and Job Opportunities
@@ -31,7 +37,7 @@ const Hero = ({ token }) => {
                   href={"/login"}
                   className="bg-orange-400 p-4 text-2xl rounded-xl text-white font-bold"
                 >
-                  Start for free
+                  Create for free
                 </Link>
               </div>
             )}
@@ -39,7 +45,7 @@ const Hero = ({ token }) => {
         </div>
         <div className="basis-1/2">
           <Image
-            src="/assets/student.jpg"
+            src="/assets/student1.png"
             width={800}
             height={500}
             alt="Picture of the student"

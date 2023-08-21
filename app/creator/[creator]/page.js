@@ -1,8 +1,9 @@
 import React from 'react'
-import Navbar from '@/components/Navbar';
+// import Navbar from '@/components/Navbar';
 import Image from 'next/image';
 import Courses from '@/components/Courses';
 import Footer from '@/components/Footer';
+import NavbarUser from '@/components/NavbarUser';
 const page = () => {
     return (
         <div style={{
@@ -12,7 +13,7 @@ const page = () => {
 
 
         }}>
-            <Navbar></Navbar>
+            <NavbarUser></NavbarUser>
             <div className='flex'>
                 <div className='basis-1/2 leading-8  flex   flex-col justify-center    m-4'>
                     <h1 className='text-5xl leading-8 text-transparent h-24 p-2 font-bold bg-clip-text bg-gradient-to-r from-orange-300 to-yellow-400' >Welcome to CodeWithHarry</h1>

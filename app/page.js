@@ -1,16 +1,30 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Navbar from "./../components/Navbar";
-
+import Navbar from "../components/Navbar";
+import { useSession } from "next-auth/react";
 import Hero from "@/components/Hero";
 import Creators from "@/components/Creators";
 import Footer from "@/components/Footer";
 
 const Home = () => {
-  const [token, setToken] = useState(false);
-  useEffect(() => {
-    setToken(JSON.parse(sessionStorage.getItem("token")));
-  }, []);
+  const session = useSession();
+  console.log("sesion", session);
+  // if (!session.data) {
+  //   return <button onClick={signIn}>login</button>
+
+  // }
+  // const { data: session, status } = useSession({
+  //   required: true,
+  // })
+  // if (status === "loading") {
+  //   <></>
+
+  // }
+  // const [token, setToken] = useState(false);
+  // useEffect(() => {
+  //   setToken(JSON.parse(sessionStorage.getItem("token")));
+  // }, []);
+  // const token = false;
   return (
     <div style={{
       background:
@@ -18,8 +32,8 @@ const Home = () => {
 
 
     }}>
-      <Navbar token={token} setToken={setToken}></Navbar>
-      <Hero token={token}></Hero>
+      <Navbar session={session} ></Navbar>
+      <Hero></Hero>
       <Creators></Creators>
       <Footer></Footer>
     </div>

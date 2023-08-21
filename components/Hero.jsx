@@ -13,11 +13,11 @@ const Hero = ({ token }) => {
     >
       <div className="flex p-4  justify-between h-screen">
         <div className="basis-1/2 flex    flex-col">
-          {token && (
+          {/* {token && (
             <div className="mb-14 capitalize mt-8  text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">
               Welcome {token.user.user_metadata.full_name}
             </div>
-          )}
+          )} */}
           <div className="text-5xl  mt-8 font-medium text-white">
             Create your online course for
             <span className="font-bold mx-4 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">
@@ -34,7 +34,7 @@ const Hero = ({ token }) => {
             {!token && (
               <div className="mt-8">
                 <Link
-                  href={"/login"}
+                  href={"/create"}
                   className="bg-orange-400 p-4 text-2xl rounded-xl text-white font-bold"
                 >
                   Create for free

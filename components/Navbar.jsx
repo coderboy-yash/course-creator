@@ -1,12 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { signIn, signOut } from "next-auth/react";
 
-const Navbar = ({ token, setToken }) => {
-  const handleLogOut = async () => {
-    sessionStorage.removeItem("token");
-    setToken(false);
-  };
+const Navbar = ({ session }) => {
+  // const handleLogOut = async () => {
+  //   sessionStorage.removeItem("token");
+  //   setToken(false);
+  // };
   return (
     <div
       style={{
@@ -16,38 +18,24 @@ const Navbar = ({ token, setToken }) => {
       className="flex justify-between px-8 py-2 mb-12  items-center bg-white"
     >
       <div className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">
-        <Link href="/">
+        <Link href="/" className="flex items-center">
           {" "}
           <span className="text-2xl font">Course Creator</span>
+          <Image
+            src="/assets/pen1.png"
+            width={50}
+            height={50}
+            alt="pen"
+          ></Image>
+
         </Link>
       </div>
 
-      {token ? (
-        <div>
-          <button
-            onClick={handleLogOut}
-            className="bg-orange-400 p-3 mx-4 text-2xl rounded-xl text-white font-bold"
-          >
-            Log out
-          </button>
-        </div>
-      ) : (
-        <div>
-          <Link
-            className="text-orange-400 p-3 mx-4 text-2xl rounded-xl  font-bold"
-            href={"/signup"}
-          >
-            Sign Up
-          </Link>
 
-          <Link
-            className=" p-3 mx-4 text-2xl rounded-xl text-orange-400 font-bold"
-            href={"/login"}
-          >
-            Log In
-          </Link>
-        </div>
+      {session.data ? (<button onClick={signOut} className=" p-3 mx-4 text-2xl rounded-xl text-orange-400 font-bold">Logout</button>) : (
+        <button onClick={signIn} className=" p-3 mx-4 text-2xl rounded-xl text-orange-400 font-bold">Login</button>
       )}
+
     </div>
   );
 };

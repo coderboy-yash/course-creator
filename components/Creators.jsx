@@ -1,9 +1,10 @@
 import React from "react";
-import data from "../data/course_list.json";
+// import data from "../data/course_list.json";
 import Creator from "./Creator";
 import Link from "next/link";
 const Creators = () => {
   //   console.log(data[0].id);
+  const data = [];
   return (
     <div>
       <span className="flex text-4xl justify-center font-bold mx-4 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">

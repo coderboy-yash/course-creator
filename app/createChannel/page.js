@@ -5,7 +5,7 @@ import Navbar from '@/components/Navbar';
 import Image from 'next/image';
 import Footer from '@/components/Footer';
 import { useSession } from "next-auth/react";
-import { addTask, addChannel } from '@/services/taskService';
+import { addChannel } from '@/services/axiosService';
 const page = () => {
 
     const session = useSession();
@@ -59,8 +59,7 @@ const page = () => {
         try {
             const result = await addChannel(channelData);
             console.log("res", result)
-            // const result = await addTask();
-            // console.log(result);
+
         }
         catch (error) {
             console.error('An error occurred:', error);

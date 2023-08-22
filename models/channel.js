@@ -3,7 +3,30 @@ const ChannelSchema = new mongoose.Schema(
     {
         channelName: {
             type: 'string',
+        },
+        channelImage: {
+            type: "string"
+        },
+        description: {
+            type: "string"
+        },
+
+        instagram: {
+            type: "string"
+        },
+        telegram: {
+            type: "string"
+        },
+        discord: {
+            type: "string"
+        },
+        linkedin: {
+            type: "string"
         }
+
+
     }
 );
-export const Channel = mongoose.models.tasks || mongoose.model("channels", ChannelSchema);
+const Channel = mongoose.models.Channel || mongoose.model('Channel', ChannelSchema);
+
+module.exports = Channel;

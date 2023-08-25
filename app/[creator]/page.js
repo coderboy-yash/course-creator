@@ -12,13 +12,17 @@ const page = ({ params }) => {
     console.log(id);
 
     const [channel, setChannel] = useState("");
+    const [courses, setCourses] = useState([]);
 
     const fetchData = async () => {
         try {
 
             const result = await getChannel(id);
-            setChannel(result.data.response);
-            console.log("1", result.data.response._id);
+            setChannel(result.data.response.data);
+            setCourses(result.data.response.courses)
+            console.log("1", result.data.response);
+            // const courseData = await getCourses(id);
+
 
         }
         catch (err) {
@@ -35,7 +39,7 @@ const page = ({ params }) => {
     return (
         <div style={{
             background:
-                "linear-gradient(35deg, rgb(23, 30, 49) 0%, rgb(0, 18, 45) 45%);",
+                "linear-gradient(35deg, rgb(23, 30, 49) 0%, rgb(0, 18, 45) 45%)",
             height: "100%",
 
 
@@ -49,10 +53,10 @@ const page = ({ params }) => {
                 <div className='basis-1/2 p-4 justify-center flex items-center'>
                     <Image
                         src={channel.channelImage}
-                        width={400}
-                        height={400}
+                        width={800}
+                        height={800}
                         alt="Picture of the student"
-                        className='rounded-[50%] h-72 w-72'
+                    // className='rounded-[50%] h-72 w-72'
                     ></Image>
                 </div>
 
@@ -61,7 +65,7 @@ const page = ({ params }) => {
             <div className='text-3xl m-24 flex justify-center text-transparent font-bold bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400'>
                 Recommended Courses
             </div>
-            <Courses></Courses>
+            <Courses id={channel.userId} courses={courses} ></Courses>
             <Footer></Footer>
 
         </div>

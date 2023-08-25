@@ -6,8 +6,11 @@ import Footer from '@/components/Footer';
 import { useSession } from 'next-auth/react';
 import { addCourse } from '@/services/axiosService';
 
-const page = () => {
+const page = ({ params }) => {
     const session = useSession();
+    const id = params;
+    console.log(id);
+
 
     const [courseInfo, setCourseInfo] = useState([
         { videoUrl: '', title: '', videoDesc: '' }
@@ -82,7 +85,7 @@ const page = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const course = { "courseData": courseData, "courseInfo": courseInfo, "num": num };
+        const course = { "courseData": courseData, "courseInfo": courseInfo, "num": num, "userId": id.creator };
         console.log(course);
 
         try {
@@ -100,7 +103,7 @@ const page = () => {
         <div
             style={{
                 background:
-                    "linear-gradient(35deg, rgb(23, 30, 49) 0%, rgb(0, 18, 45) 45%);",
+                    "linear-gradient(35deg, rgb(23, 30, 49) 0%, rgb(0, 18, 45) 45%)",
                 height: "100%",
 
 

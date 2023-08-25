@@ -3,6 +3,7 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import NextAuthSessionProvider from './providers/sessionProvider'
 // import { UserProvider } from '@auth0/nextjs-auth0/client';
+import ThemeProvider from './theme-provider'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -20,9 +21,12 @@ export default function RootLayout({ children }) {
         height: "100%",
 
 
-      }}>
-        <NextAuthSessionProvider>
-          {children}
+      }}>    <NextAuthSessionProvider>
+          <ThemeProvider>
+
+            {children}
+
+          </ThemeProvider>
         </NextAuthSessionProvider>
       </body>
     </html>

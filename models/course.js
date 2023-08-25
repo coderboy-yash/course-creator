@@ -17,6 +17,9 @@ const CourseSchema = new mongoose.Schema({
     },
     videoNum: {
         type: Number // Use the actual data type, not a string
+    },
+    channelName: {
+        type: String
     }
 });
 

@@ -1,14 +1,25 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 // import { CldUploadWidget } from 'next-cloudinary';
 import Navbar from '@/components/Navbar';
 import Image from 'next/image';
 import Footer from '@/components/Footer';
 import { useSession } from "next-auth/react";
 import { addChannel } from '@/services/axiosService';
+import { ThemeContext } from '../theme-provider';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+// import { toast } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 const page = () => {
 
     const session = useSession();
+    const router = useRouter();
+    const value = useContext(ThemeContext);
+    // console.log(value)
+    useEffect(() => {
+
+    }, [value]);
     // const [image, setImage] = useState(null);
     const [channelData, setChannelData] = useState({
         channelName: '',
@@ -18,7 +29,10 @@ const page = () => {
         discordLink: '',
         telegramLink: '',
         instagramLink: '',
+
+
     });
+
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -47,35 +61,46 @@ const page = () => {
                 }
             }
         );
-
         myWidget.open();
     }
 
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log('Form submitted:', channelData);
-        // Add your submission logic here
+
+
         try {
-            const result = await addChannel(channelData);
+            const data = {
+                data: channelData,
+                id: value.uid
+            }
+            const result = await addChannel(data);
             console.log("res", result)
+            toast.success("channel added successfully");
+            router.push("/");
 
         }
         catch (error) {
             console.error('An error occurred:', error);
         }
-    }
 
+    }
     return (
         <div
+
             style={{
                 background:
-                    "linear-gradient(35deg, rgb(23, 30, 49) 0%, rgb(0, 18, 45) 45%);",
+                    "linear-gradient(35deg, rgb(23, 30, 49) 0%, rgb(0, 18, 45) 45%)",
                 height: "100%",
 
 
             }}
         >
+
+
+
+            <Toaster></Toaster>
+
             <Navbar session={session}></Navbar>
             <div className='flex justify-center  '>
                 <div className='basis-1/2 flex items-center'>
@@ -95,8 +120,9 @@ const page = () => {
 
                     <span className='text-transparent mb-6 bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-300 text-4xl flex justify-center font-bold  '>Create Channel</span>
                     <form
-                        onSubmit={handleSubmit}
+
                         className="flex gap-4 flex-col text-white "
+                        onSubmit={handleSubmit}
                     >
                         <label htmlFor="channelName">Channel name</label>
                         <input
@@ -112,6 +138,7 @@ const page = () => {
                         <button
                             id="upload-widget"
                             className="cloudinary-button"
+                            type='button'
                             onClick={() => handleOpenWidget()}
                         >
                             Select channel image
@@ -186,12 +213,7 @@ const page = () => {
                             required
                         />
 
-                        <button
-                            className="bg-gradient-to-r rounded-xl text-slate-800 font-bold from-orange-400 to-yellow-300 text-3xl p-2 w-1/2"
-                            type="submit"
-                        >
-                            Submit
-                        </button>
+                        <button className='bg-gradient-to-r rounded-xl text-slate-800 font-bold from-orange-400 to-yellow-300 text-3xl p-2 w-1/2' type="submit">Submit</button>
                     </form>
 
                 </div>
@@ -201,6 +223,7 @@ const page = () => {
                 src="https://upload-widget.cloudinary.com/global/all.js"
                 type="text/javascript"
             ></script>
+
         </div>
 
     )

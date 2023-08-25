@@ -2,27 +2,34 @@ import mongoose from 'mongoose';
 const ChannelSchema = new mongoose.Schema(
     {
         channelName: {
-            type: 'string',
+            type: String,
+        },
+        userId: {
+            type: String,
         },
         channelImage: {
-            type: "string"
+            type: String,
         },
         description: {
-            type: "string"
+            type: String,
         },
 
         instagram: {
-            type: "string"
+            type: String,
         },
         telegram: {
-            type: "string"
+            type: String,
         },
         discord: {
-            type: "string"
+            type: String,
         },
         linkedin: {
-            type: "string"
+            type: String,
+        },
+        userId: {
+            type: String,
         }
+
 
 
     }

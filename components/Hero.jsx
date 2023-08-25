@@ -1,23 +1,37 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
-const Hero = ({ token }) => {
+import { ThemeContext } from "@/app/theme-provider";
+import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from 'next/navigation';
+const Hero = () => {
+  const router = useRouter();
+  const value = useContext(ThemeContext);
+  useEffect(() => {
+    console.log(value)
+  }, [value.uid]);
+  const handleClick = () => {
+    if (value.uid == "") {
+      return toast.error("you must login first");
+    }
+    else {
+      router.push('/createChannel')
+    }
+  }
+
   return (
     <div
       className="text-white"
       style={{
         background:
-          "linear-gradient(35deg, rgb(23, 30, 49) 0%, rgb(0, 18, 45) 45%);",
+          "linear-gradient(35deg, rgb(23, 30, 49) 0%, rgb(0, 18, 45) 45%)",
       }}
     >
+      <Toaster></Toaster>
       <div className="flex p-4  justify-between h-screen">
         <div className="basis-1/2 flex    flex-col">
-          {/* {token && (
-            <div className="mb-14 capitalize mt-8  text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">
-              Welcome {token.user.user_metadata.full_name}
-            </div>
-          )} */}
+
           <div className="text-5xl  mt-8 font-medium text-white">
             Create your online course for
             <span className="font-bold mx-4 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">
@@ -31,16 +45,8 @@ const Hero = ({ token }) => {
             career now!
           </div>
           <div>
-            {!token && (
-              <div className="mt-8">
-                <Link
-                  href={"/create"}
-                  className="bg-orange-400 p-4 text-2xl rounded-xl text-white font-bold"
-                >
-                  Create for free
-                </Link>
-              </div>
-            )}
+            <button onClick={handleClick} className="bg-orange-400 p-4 text-2xl rounded-xl text-white font-bold">Crete for free</button>
+
           </div>
         </div>
         <div className="basis-1/2">

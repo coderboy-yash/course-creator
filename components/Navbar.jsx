@@ -1,19 +1,19 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { signIn, signOut } from "next-auth/react";
-
+import { ThemeContext } from "@/app/theme-provider";
+import { Button } from 'flowbite-react';
 const Navbar = ({ session }) => {
-  // const handleLogOut = async () => {
-  //   sessionStorage.removeItem("token");
-  //   setToken(false);
-  // };
+  const value = useContext(ThemeContext);
+
+
   return (
     <div
       style={{
         background:
-          "linear-gradient(35deg, rgb(23, 30, 49) 0%, rgb(0, 18, 45) 45%);",
+          "linear-gradient(35deg, rgb(23, 30, 49) 0%, rgb(0, 18, 45) 45%)",
       }}
       className="flex justify-between px-8 py-2 mb-12  items-center bg-white"
     >
@@ -32,7 +32,14 @@ const Navbar = ({ session }) => {
       </div>
 
 
-      {session.data ? (<button onClick={signOut} className=" p-3 mx-4 text-2xl rounded-xl text-orange-400 font-bold">Logout</button>) : (
+      {session.data ? (!value.uid ? (<Button
+        isProcessing
+        size="xs"
+      >
+        <p>
+          finding user
+        </p>
+      </Button>) : (<button onClick={signOut} className=" p-3 mx-4 text-2xl rounded-xl text-orange-400 font-bold">Logout</button>)) : (
         <button onClick={signIn} className=" p-3 mx-4 text-2xl rounded-xl text-orange-400 font-bold">Login</button>
       )}
 

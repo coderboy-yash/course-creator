@@ -9,7 +9,7 @@ const NavbarUser = ({ insta, linkedin, discord, telegram }) => {
     <div
       style={{
         background:
-          "linear-gradient(35deg, rgb(23, 30, 49) 0%, rgb(0, 18, 45) 45%);",
+          "linear-gradient(35deg, rgb(23, 30, 49) 0%, rgb(0, 18, 45) 45%)",
       }}
       className="flex justify-between px-8 py-2 mb-12  items-center bg-white"
     >

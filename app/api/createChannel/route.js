@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { Channel } from "@/models/channel";
+import Channel from "@/models/channel";
 import { connectDb } from "@/helper/db";
 // export function GET(req) {
 //     // console.log(req);
@@ -11,20 +11,23 @@ import { connectDb } from "@/helper/db";
 export async function POST(req) {
     connectDb();
     const data = await req.json();
-    console.log(data);
+    console.log("2", data);
+    // const del = await Channel.deleteMany({});
     const channel = new Channel({
-        channelName: data.channelName,
-        channelImage: data.channelImage,
-        description: data.channelDescription,
-        instagram: data.instagramLink,
-        telegram: data.telegramLink,
-        discord: data.discordLink,
-        linkedin: data.linkedinLink
+        channelName: data.data.channelName,
+        userId: data.id,
+        channelImage: data.data.channelImage,
+        description: data.data.channelDescription,
+        instagram: data.data.instagramLink,
+        telegram: data.data.telegramLink,
+        discord: data.data.discordLink,
+        linkedin: data.data.linkedinLink,
 
 
     })
     const createdChannel = await channel.save();
     return NextResponse.json({
-        message: "body recieved"
+        message: "body recieved",
+
     })
 }

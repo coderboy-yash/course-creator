@@ -1,21 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import Course from "./Course";
+import { ThemeContext } from "@/app/theme-provider";
+import Link from "next/link";
 
-const Courses = () => {
+const Courses = ({ id, courses }) => {
+  const value = useContext(ThemeContext);
+  console.log(courses);
   return (
     <div className="flex flex-wrap gap-6 justify-center mb-10 ">
+      {
+        courses.length > 0 && courses.map(item => (
 
+          <Course course={item}></Course>
+        ))
+      }
+      {/* <Course></Course>
       <Course></Course>
-      <Course></Course>
-      <Course></Course>
-      <Course></Course>
+      <Course></Course> */}
 
-      <div className="h-64 m-4 w-64 bg-slate-700 text-orange-400 text-9xl flex flex-col justify-center items-center">
-        <span className="">+</span>
+      {(value.uid == id) && <div className="h-64 m-4 w-64 bg-slate-700 text-orange-400 text-9xl flex flex-col justify-center items-center">
 
-        <span className="text-xl text-white">add course here</span>
+        <Link href={`${id}/createCourse`} className="">+</Link>
 
-      </div>
+        <Link href={`${id}/createCourse`} className="text-xl text-white">add course here</Link>
+
+      </div>}
 
 
 

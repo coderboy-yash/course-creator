@@ -14,9 +14,10 @@ import toast, { Toaster } from 'react-hot-toast';
 const page = () => {
 
     const session = useSession();
+    console.log(session);
     const router = useRouter();
     const value = useContext(ThemeContext);
-    // console.log(value)
+    console.log(value)
     useEffect(() => {
 
     }, [value]);
@@ -33,7 +34,16 @@ const page = () => {
 
     });
 
-
+// const handleTextChange=(event)=>{
+//     const { name, value } = event.target;
+//     if(value.length<150 ){
+//         return toast.error("enter atlest 150 character")
+//     }
+//         setChannelData((prevData) => ({
+//             ...prevData,
+//             [name]: value,
+//         }));
+// }
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setChannelData((prevData) => ({
@@ -41,6 +51,15 @@ const page = () => {
             [name]: value,
         }));
     };
+    const handleNameInput=(event)=>{
+        const { name, value } = event.target;
+        const newValue=value.split(" ").join("-");
+        setChannelData((prevData) => ({
+            ...prevData,
+            [name]: newValue,
+        }));
+        
+    }
     function handleOpenWidget() {
         var myWidget = window.cloudinary.createUploadWidget(
             {
@@ -67,6 +86,15 @@ const page = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if(value.uid==""){
+            return toast.error("please login before submit");
+        }
+        if(channelData.channelImage==null){
+            return toast.error("image not uploaded ")
+        }
+        if(channelData.channelDescription.length<150 ){
+            return toast.error("enter atlest 150 character")
+        }
 
 
         try {
@@ -130,9 +158,10 @@ const page = () => {
                             id="channelName"
                             name="channelName"
                             value={channelData.channelName}
-                            onChange={handleInputChange}
+                            onChange={handleNameInput}
                             placeholder="enter youtube channel name"
                             className="text-white bg-transparent border-4 border-slate-600 rounded-xl"
+                            required
                         />
                         {/* <label htmlFor="channelImage">Select channel image</label> */}
                         <button
@@ -153,7 +182,10 @@ const page = () => {
                             rows="5"
                             cols="33"
                             className="text-white bg-transparent border-4 border-slate-600 rounded-xl"
-                            placeholder="Confused on which course to take? I have got you covered. Browse courses and find out the best course for you. Its free! Code With Harry is my attempt to teach basics and those coding techniques to people in short time which took me ages to learn."
+                            placeholder="enter atlleast 150 characters"
+                            required
+                            
+                            pattern=".{150,}"
                         />
                         {/* ... (other input elements) ... */}
 
@@ -169,6 +201,7 @@ const page = () => {
                             pattern="https://.*"
                             size="30"
                             required
+                            
                         />
 
                         <label htmlFor="discordLink">Enter Discord group link</label>

@@ -17,15 +17,16 @@ const Navbar = ({ session }) => {
       }}
       className="flex justify-between px-8 py-2 mb-12  items-center bg-white"
     >
-      <div className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">
+      <div className="md:text-5xl text-md font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">
         <Link href="/" className="flex items-center">
           {" "}
-          <span className="text-2xl font">Course Creator</span>
+          <span className="md:text-2xl text-md font">Course Creator</span>
           <Image
             src="/assets/pen1.png"
             width={50}
             height={50}
             alt="pen"
+            className="md:w-50 w-30"
           ></Image>
 
         </Link>

@@ -1,21 +1,26 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState,useContext } from 'react'
 import Navbar from '@/components/Navbar';
 import Image from 'next/image';
 import Footer from '@/components/Footer';
 import { useSession } from 'next-auth/react';
 import { addCourse } from '@/services/axiosService';
-
+import { ThemeContext } from '../../theme-provider';
+import toast, { Toaster } from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 const page = ({ params }) => {
+    const router = useRouter();
     const session = useSession();
     const id = params;
     console.log(id);
-
-
+    const value = useContext(ThemeContext);
+useEffect(()=>{
+// window.location.reload();
+},[])
     const [courseInfo, setCourseInfo] = useState([
         { videoUrl: '', title: '', videoDesc: '' }
     ]);
-    const [num, setNum] = useState(0);
+    const [num, setNum] = useState(1);
 
     const handleInfoChange = (index, field, value) => {
         const updatedInfo = [...courseInfo];
@@ -52,6 +57,9 @@ const page = ({ params }) => {
                 uploadPreset: "vaaar8p2",
             },
             (error, result) => {
+                if(error){
+                    return toast.error("error while uploading")
+                }
                 if (!error && result && result.event === "success") {
                     setCourseData(prevData => ({
                         ...prevData,
@@ -59,6 +67,7 @@ const page = ({ params }) => {
                     }));
                     console.log("Done! Here is the image info: ", result);
                     const timer = setTimeout(() => {
+                        toast.success("image uploaded successfully")
                         console.log("image uploaded successfully");
                     }, 2000);
                     return () => clearTimeout(timer);
@@ -84,13 +93,23 @@ const page = ({ params }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
+        if(value.uid==""){
+            return toast.error("please login before submit");
+        }
+        if(courseData.courseImage==""){
+            return toast.error("image not uploaded ")
+        }
+        if(courseData.courseDescription.length<150 ){
+            return toast.error("enter atlest 150 character")
+        }
         const course = { "courseData": courseData, "courseInfo": courseInfo, "num": num, "userId": id.creator };
         console.log(course);
 
         try {
             const result = await addCourse(course);
             console.log("res", result)
+            toast.success("course added successfully");
+            router.push("/");
 
         }
         catch (error) {
@@ -110,6 +129,7 @@ const page = ({ params }) => {
             }}
         >
             <Navbar session={session}></Navbar>
+            <Toaster></Toaster>
 
             <div className='flex justify-center  '>
                 <div className='basis-1/2 flex items-center'>
@@ -130,7 +150,8 @@ const page = ({ params }) => {
                     <span className='text-transparent mb-6 bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-300 text-4xl flex justify-center font-bold  '>Create Course</span>
                     <form action="" className='flex gap-4 flex-col text-white  ' onSubmit={handleSubmit} >
                         Course name
-                        <input type="text"
+                        <input type="text" required
+                        
                             name="courseName"
                             value={courseData.courseName} onChange={handleInputChange} placeholder='enter course name' className='text-white bg-transparent border-4 border-slate-600 rounded-xl ' />
                         <button
@@ -142,12 +163,14 @@ const page = ({ params }) => {
                         </button>
                         enter course description
                         <textarea id="courseDescription"
+                        required
                             name="courseDescription"
                             value={courseData.courseDescription} onChange={handleInputChange} rows="5" cols="33 " className='text-white bg-transparent border-4 border-slate-600 rounded-xl h-28 ' placeholder='Confused on which course to take? I have got you covered. Browse courses and find out the best course for you. Its free! Code With Harry is my attempt to teach basics and those coding techniques to people in short time which took me ages to learn.'>
 
                         </textarea>
                         enter number of videos available for the course
                         <input
+                             required
                             type="number"
                             value={num}
                             onChange={handleNumChange}
@@ -170,12 +193,13 @@ const page = ({ params }) => {
                                         onChange={(e) => handleInfoChange(index, 'videoUrl', e.target.value)}
                                     />
                                     <input type="text"
+                                    required
                                         value={info.title}
                                         placeholder='video title'
                                         onChange={(e) => handleInfoChange(index, 'title', e.target.value)}
 
                                         className='text-white bg-transparent border-4 w-full border-slate-600 rounded-xl' />
-                                    <textarea id="story" value={info.videoDesc} onChange={(e) => handleInfoChange(index, 'videoDesc', e.target.value)} rows="5" cols="33 " className='text-white bg-transparent border-4 border-slate-600 rounded-xl h-28 ' placeholder='short video description.'>
+                                    <textarea required id="story" value={info.videoDesc} onChange={(e) => handleInfoChange(index, 'videoDesc', e.target.value)} rows="5" cols="33 " className='text-white bg-transparent border-4 border-slate-600 rounded-xl h-28 ' placeholder='short video description.'>
 
                                     </textarea>
                                 </div>

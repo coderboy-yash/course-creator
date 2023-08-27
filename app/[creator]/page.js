@@ -5,6 +5,8 @@ import Image from 'next/image';
 import Courses from '@/components/Courses';
 import Footer from '@/components/Footer';
 import NavbarUser from '@/components/NavbarUser';
+import TextSkeleton from '@/components/TextSkeleton';
+import ImageSkeleton from '@/components/ImageSkeleton';
 import { getChannel } from '@/services/axiosService';
 // import { useEffect } from 'react';
 const page = ({ params }) => {
@@ -13,7 +15,7 @@ const page = ({ params }) => {
 
     const [channel, setChannel] = useState("");
     const [courses, setCourses] = useState([]);
-
+const [loading,setLoading]=useState(true);
     const fetchData = async () => {
         try {
 
@@ -21,6 +23,7 @@ const page = ({ params }) => {
             setChannel(result.data.response.data);
             setCourses(result.data.response.courses)
             console.log("1", result.data.response);
+            setLoading(false)
             // const courseData = await getCourses(id);
 
 
@@ -44,19 +47,21 @@ const page = ({ params }) => {
 
 
         }}>
-            <NavbarUser insta={channel.instagram} telegram={channel.telegram} discord={channel.discord} linkedin={channel.linkedin} ></NavbarUser>
+<NavbarUser insta={channel.instagram} telegram={channel.telegram} discord={channel.discord} linkedin={channel.linkedin} ></NavbarUser>
             <div className='flex'>
-                <div className='basis-1/2 leading-8  flex   flex-col justify-center    m-4'>
-                    <h1 className='text-5xl leading-8 text-transparent h-24 p-2 font-bold bg-clip-text bg-gradient-to-r from-orange-300 to-yellow-400' >Welcome to {channel.channelName}</h1>
-                    <span className='text-xl text-slate-300 leading-8 font-thin capitalize'>{channel.description}.</span>
+                <div className='basis-1/2 leading-loose flex   flex-col justify-center   '>
+                    <p className='text-5xl leading-normal text-transparent  p-2 font-bold bg-clip-text bg-gradient-to-r m-4 from-orange-300 to-yellow-400' >Welcome to {channel.channelName}</p>
+                    {loading&& <div><TextSkeleton></TextSkeleton></div> }
+                    <span className='text-xl text-slate-300 leading-8  font-thin capitalize'>{channel.description}.</span>
                 </div>
                 <div className='basis-1/2 p-4 justify-center flex items-center'>
+                {loading&& <div><ImageSkeleton></ImageSkeleton></div> }
                     <Image
                         src={channel.channelImage}
                         width={800}
                         height={800}
                         alt="Picture of the student"
-                    // className='rounded-[50%] h-72 w-72'
+                    className=' h-96 w-96'
                     ></Image>
                 </div>
 
@@ -65,10 +70,10 @@ const page = ({ params }) => {
             <div className='text-3xl m-24 flex justify-center text-transparent font-bold bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400'>
                 Recommended Courses
             </div>
-            <Courses id={channel.userId} courses={courses} ></Courses>
+            <Courses id={channel.userId} courses={courses} loading={loading} ></Courses>
             <Footer></Footer>
-
         </div>
+
     )
 }
 

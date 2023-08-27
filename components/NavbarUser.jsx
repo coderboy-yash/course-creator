@@ -30,18 +30,18 @@ const NavbarUser = ({ insta, linkedin, discord, telegram }) => {
         <span className="text-white">connect me at &rarr; </span>
         <Link href={insta || "/"}>
           <Image
-            src="/assets/instagram.png"
-            width={50}
-            height={50}
+            src="/assets/instagram.svg"
+            width={30}
+            height={30}
             alt="Picture of the student"
           ></Image>
         </Link>
 
         <Link href={discord || '/'}>
           <Image
-            src="/assets/discord.png"
-            width={50}
-            height={10}
+            src="/assets/discord.svg"
+            width={30}
+            height={30}
             alt="Picture of the student"
           ></Image>
         </Link>
@@ -49,18 +49,18 @@ const NavbarUser = ({ insta, linkedin, discord, telegram }) => {
 
         <Link href={linkedin || '/'}>
           <Image
-            src="/assets/linkedin.png"
-            width={50}
-            height={50}
+            src="/assets/linkedin.svg"
+            width={30}
+            height={30}
             alt="Picture of the student"
           ></Image>
         </Link>
 
         <Link href={telegram || "/"}>
           <Image
-            src="/assets/telegram.png"
-            width={50}
-            height={50}
+            src="/assets/telegram.svg"
+            width={30}
+            height={30}
             alt="Picture of the student"
           ></Image>
         </Link>

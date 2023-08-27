@@ -19,11 +19,11 @@ const Creator = ({ channel }) => {
         width="400"
         height="400"
         alt="picture of the student"
-        className="object-cover w-72   "
+        className="object-fill w-72 h-60   "
       ></Image>
 
       <div className="flex flex-col justify-center ">
-        <h1 className="text-3xl flex justify-center m-4 capitalize font-bold">{channel.channelName}</h1>
+        <h1 className="text-2xl flex justify-center m-4 capitalize font-bold">{channel.channelName}</h1>
         <h2 className="text-md text-gray-200 p-3">{channel.description.substring(0, 100)}<span className="text-2xl">...</span></h2>
         <button onClick={handleClick} className="bg-gradient-to-r from-violet-600 to-indigo-600   p-2  w-full text-2xl">
           view page

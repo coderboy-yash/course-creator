@@ -3,7 +3,7 @@ import Course from "./Course";
 import { ThemeContext } from "@/app/theme-provider";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import ImageSkeleton from "./imageSkeleton";
+import ImageSkeleton from "./ImageSkeleton";
 
 const Courses = ({ id, courses,loading }) => {
   const value = useContext(ThemeContext);

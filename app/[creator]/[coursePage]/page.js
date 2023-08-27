@@ -5,8 +5,8 @@ import NavbarUser from '@/components/NavbarUser';
 import Footer from '@/components/Footer';
 import { getCourse } from '@/services/axiosService';
 import Image from 'next/image'
-import TextSkeleton from '@/components/textSkeleton';
-import VideoSkeleton from '@/components/videoSkeleton';
+import TextSkeleton from '@/components/TextSkeleton';
+import VideoSkeleton from '@/components/VideoSkeleton';
 
 const page = ({ params }) => {
 
